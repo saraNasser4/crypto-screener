@@ -10,15 +10,14 @@ There was something I faced in this part which was I'd made the router in the Ap
 ## finish with Home page
 
 finish with the basics of the styling and the logic of Home page.
-
 there were some issues here where I needed to make the router inside a nav so I made a component to it.
 
-### `npm test`
+## create the table where all of our data are gonna end there
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+I started with the only the styling before adding the API to make sure that I'm gonna only work on it.
+I added a varible changes whenever the size of the screen changes so I can display only data fits the screen and I'm satisfied with the results so far.
 
-### `npm run build`
+## 
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
