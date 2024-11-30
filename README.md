@@ -2,9 +2,10 @@
 
 I started by creating the app and remove and add the essential items.
 
-## Available Scripts
+## initialize React Router
 
-In the project directory, you can run:
+I needed to make it basic at first so I only added the name of the pages and up until now everythings work good.
+There was something I faced in this part which was I'd made the router in the App component so I thought throughout this project the App component is gonna be bigger and it's not a good parctice in the future so I moved the Router inside the Index component.
 
 ### `npm start`
 
