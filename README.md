@@ -7,13 +7,11 @@ I started by creating the app and remove and add the essential items.
 I needed to make it basic at first so I only added the name of the pages and up until now everythings work good.
 There was something I faced in this part which was I'd made the router in the App component so I thought throughout this project the App component is gonna be bigger and it's not a good parctice in the future so I moved the Router inside the Index component.
 
-### `npm start`
+## finish with Home page
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+finish with the basics of the styling and the logic of Home page.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+there were some issues here where I needed to make the router inside a nav so I made a component to it.
 
 ### `npm test`
 
