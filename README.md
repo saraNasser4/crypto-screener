@@ -17,19 +17,12 @@ there were some issues here where I needed to make the router inside a nav so I 
 I started with the only the styling before adding the API to make sure that I'm gonna only work on it.
 I added a varible changes whenever the size of the screen changes so I can display only data fits the screen and I'm satisfied with the results so far.
 
+## Add coingecko api
+
+I put the data from that API in separate component just to make sure that I can access to it in whatever part in this project and wrap it on the Home component.
+I displayed the data in the screen and everything works perfact up until now there only one thing I need to add which is change the format from the data depends on the type of it.
+
 ## 
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
 If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
