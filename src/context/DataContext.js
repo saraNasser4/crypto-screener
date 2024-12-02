@@ -7,7 +7,7 @@ export default function DataProvider (props){
     
     const getCryptoData = async ()=> {
         try {
-            const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
+            const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
             const data = await fetch(url)
                             .then(res=> res.json())
                             .then(json=> json)

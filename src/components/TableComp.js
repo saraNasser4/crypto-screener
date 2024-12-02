@@ -42,16 +42,16 @@ export default function TableComp (){
     }
     
     return(
-        <table className="mt-9 border border-gray-100 w-full rounded flex flex-col">
+        <table className="mt-9 mb-16 border border-gray-100 w-full rounded table-auto">
             <thead className="capitalize text-gray-100 text-lg font-medium border-b border-b-gray-100">
-                <tr className="flex justify-evenly w-full">
-                    {screenSize.map((data, index)=> <th key={index} className="py-1">{data}</th>)}
+                <tr className="">
+                    {screenSize.map((data, index)=> <th key={index} className="py-1" style={{maxWidth: `calc(100% / ${screenSize.length})`}}>{data}</th>)}
                 </tr>
             </thead>
-            <tbody className="[&>tr]:border-b ">
+            <tbody className="[&>tr]:border-b">
                 {cryptoData?.map((data, index)=> {
                     return(
-                        <tr key={index} className="flex justify-evenly items-center hover:bg-gray-200 w-full text-[1.1rem]">
+                        <tr key={index} className={` hover:bg-gray-200 text-[1.1rem]`}>
                             {requiredData?.map((d,i)=> {
                                 let value = data[d]
                                 if (typeof value === 'number') {
@@ -63,17 +63,16 @@ export default function TableComp (){
                                         
                                     }else {
                                         value = value.toFixed(2)
-                                    }
-                                
+                                    }                   
                                 } else if (d === 'symbol') {
                                     value = value.toUpperCase();
                                 }
                                 
                                 return(
-                                        <td key={i} className={`${value < 1 && value > 0 ? 'text-green' : value < 0 ? 'text-red' : ''} py-4`}>
-                                            {d === 'symbol' ? 
+                                    <td key={i} className={`${value < 1 && value > 0 ? 'text-green' : value < 0 ? 'text-red' : ''} py-4 text-center`} style={{maxWidth: `calc(100% / ${screenSize.length})`}}>
+                                        {d === 'symbol' ? 
                                             (
-                                                <div className="flex items-center">
+                                                <div className="flex items-center pl-2">
                                                     <button>
                                                         <svg className="fill-gray-100 hover:fill-cyan" width="25" height="25" viewBox="0 0 30 30" fill="cyan" xmlns="http://www.w3.org/2000/svg">
                                                         <g clipPath="url(#clip0_16_420)">
@@ -90,9 +89,9 @@ export default function TableComp (){
                                                     <span>{value}</span>
                                                 </div>
                                             ) 
-                                            : value}
-                                        </td>
-                                    
+                                            : value
+                                        }
+                                    </td>
                                 )
                             })}
                         </tr>
