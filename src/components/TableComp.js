@@ -1,10 +1,12 @@
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import { DataContext } from "../context/DataContext";
+import { GlobalStates } from "../context/GlobalStates";
 
 export default function TableComp (){
     const { cryptoData } = useContext(DataContext)
+    let windowSize  = useContext(GlobalStates)
+    console.log(windowSize)
     
-    const [windowSize, setWindowSize] = useState(window.innerWidth)
 
     const theadData = {
         mobile: ['Asset', 'Price'] ,
@@ -24,11 +26,6 @@ export default function TableComp (){
         '7D': 'price_change_percentage_7d_in_currency',
     }
     
-    useEffect(()=> {
-        const handleResize = () => setWindowSize(window.innerWidth);
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);   
-    }, [windowSize])
     
     const screenSize = windowSize <= 630 ? theadData.mobile :
         windowSize <= 820 ? theadData.sm : 
@@ -72,7 +69,7 @@ export default function TableComp (){
                                     <td key={i} className={`${value < 1 && value > 0 ? 'text-green' : value < 0 ? 'text-red' : ''} py-4 text-center`} style={{maxWidth: `calc(100% / ${screenSize.length})`}}>
                                         {d === 'symbol' ? 
                                             (
-                                                <div className="flex items-center pl-2">
+                                                <div className="flex items-center md:justify-center pl-2 md:pl-0">
                                                     <button>
                                                         <svg className="fill-gray-100 hover:fill-cyan" width="25" height="25" viewBox="0 0 30 30" fill="cyan" xmlns="http://www.w3.org/2000/svg">
                                                         <g clipPath="url(#clip0_16_420)">

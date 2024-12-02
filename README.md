@@ -26,11 +26,9 @@ I displayed the data in the screen and everything works perfact up until now the
 
 I needed to make the data looks stylish and change the style depends on what kind of data we render.
 
-## 
+## Style Filter section
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+I wanted to make a search bar and sorting input so I can access my data more easliy up until now I only add the style there's no logic.
 
 ### Code Splitting
 
