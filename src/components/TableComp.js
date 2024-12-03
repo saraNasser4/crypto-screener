@@ -5,9 +5,7 @@ import { GlobalStates } from "../context/GlobalStates";
 export default function TableComp (){
     const { cryptoData } = useContext(DataContext)
     let windowSize  = useContext(GlobalStates)
-    console.log(windowSize)
     
-
     const theadData = {
         mobile: ['Asset', 'Price'] ,
         sm: ['Asset', 'Name', 'Price', 'Market Cap Change'],
