@@ -54,8 +54,6 @@ export default function TableComp (){
                                         value = `$${value.toFixed(1)}`
                                     }else if (d === 'price_change_percentage_24h') {
                                         value = `${value.toFixed(2)}%`
-                                    }else if (d === 'total_volume') {
-                                        
                                     }else {
                                         value = value.toFixed(2)
                                     }                   
@@ -64,7 +62,7 @@ export default function TableComp (){
                                 }
                                 
                                 return(
-                                    <td key={i} className={`${value < 1 && value > 0 ? 'text-green' : value < 0 ? 'text-red' : ''} py-4 text-center`} style={{maxWidth: `calc(100% / ${screenSize.length})`}}>
+                                    <td key={i} className={`${value > 0 && d !== 'total_volume' ? 'text-green' : value < 0 ? 'text-red' : ''} py-4 text-center`} style={{maxWidth: `calc(100% / ${screenSize.length})`}}>
                                         {d === 'symbol' ? 
                                             (
                                                 <div className="flex items-center md:justify-center pl-2 md:pl-0">

@@ -5,10 +5,11 @@ export const DataContext = createContext({})
 export default function DataProvider (props){
     const [cryptoData, setCryptoData] = useState();
     const [searchData, setSearchData] = useState();
+    const [coinSearch, setCoinSearch] = useState('');
     
     const getCryptoData = async ()=> {
         try {
-            const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
+            const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coinSearch}&order=market_cap_desc&per_page=10&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
             const data = await fetch(url)
                             .then(res=> res.json())
                             .then(json=> json)
@@ -25,6 +26,7 @@ export default function DataProvider (props){
                         .then(res=> res.json())
                         .then(json => json)
         setSearchData(data)
+        console.log(data)
       } catch(err) {
         console.log(err, 'Search Error')
       }
@@ -32,9 +34,9 @@ export default function DataProvider (props){
 
     useEffect(()=> {
         getCryptoData()
-    }, [])
+    }, [coinSearch])
     return(
-        <DataContext.Provider value={{cryptoData, getSearchResult, searchData}}>
+        <DataContext.Provider value={{cryptoData, getSearchResult, searchData, setCoinSearch}}>
             {props.children}
         </DataContext.Provider>
     )
