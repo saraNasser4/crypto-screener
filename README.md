@@ -35,11 +35,12 @@ I wanted to make a search bar and sorting input so I can access my data more eas
 In this section I use a url from CoinGecko API to fetch data based on the name of a coin that user types in the search bar.
 I was facing infinite loops cuz I'd used UseEffect to re-render everytime the user entered something in the search bar.However, I solved it by controlled the dependency array in useEffect I onlly included the user's text rather than the func itself getSearchResult.
 
+## Finish with Currency component
+
+I made the currency input functional so when the user write down any type of currency the api fetch the data with this currency.
+As always you aren't sure what's the user gonna write so I've handled by before I send the url with the currency. I had to make sure first if this currency exist or not in the first place and I've done it by adding a default value to the url just in case if something went wrong and if the user write down his name for exapmle it shows N/A.
+
 ## 
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 

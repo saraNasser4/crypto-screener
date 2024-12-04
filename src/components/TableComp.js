@@ -3,7 +3,7 @@ import { DataContext } from "../context/DataContext";
 import { GlobalStates } from "../context/GlobalStates";
 
 export default function TableComp (){
-    const { cryptoData } = useContext(DataContext)
+    const { cryptoData, currency } = useContext(DataContext)
     let windowSize  = useContext(GlobalStates)
     
     const theadData = {
@@ -51,7 +51,7 @@ export default function TableComp (){
                                 let value = data[d]
                                 if (typeof value === 'number') {
                                     if (d === 'current_price') {
-                                        value = `$${value.toFixed(1)}`
+                                        value = value.toLocaleString('en-US', {style: 'currency', currency: currency.toUpperCase()})
                                     }else if (d === 'price_change_percentage_24h') {
                                         value = `${value.toFixed(2)}%`
                                     }else {
