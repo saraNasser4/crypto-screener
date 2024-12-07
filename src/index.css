@@ -3,3 +3,8 @@
 @tailwind utilities;
 
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
+
+.btn-active {
+    background-color: #14ffec !important;
+    color: #212121 !important;
+}
