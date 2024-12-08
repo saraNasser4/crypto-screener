@@ -44,9 +44,9 @@ As always you aren't sure what's the user gonna write so I've handled by before 
 
 This section wasn't risky as Currency componet cuz at least the user's not gonna write anything he's just gonna choose so I changed the url to change when the value changed.
 
-## 
+## Remove Home Component
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+I realized that the Home component was not useful to me and also it'd made diffcult to manage the Crypto page as a default So, it was better to remove it and make the Crypto as main page.
 
 ### Deployment
 
