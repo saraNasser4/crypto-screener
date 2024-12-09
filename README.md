@@ -48,9 +48,11 @@ This section wasn't risky as Currency componet cuz at least the user's not gonna
 
 I realized that the Home component was not useful to me and also it'd made diffcult to manage the Crypto page as a default So, it was better to remove it and make the Crypto as main page.
 
-### Deployment
+## Done with the Pagination component
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+It was really a daunting task I'd been tryna solve it for 3 days almost. however, I figured out the simplicity is the key instead of writing down 7 func and object contains all of the data I'd write only 3 (next, prev, total btn) and it works fine.
+I removed the useRef to handling the DOM manipulate and instead I used useState why? using useRef is daunting to debug compared to useState hook.
+
 
 ### `npm run build` fails to minify
 

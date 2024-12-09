@@ -1,124 +1,80 @@
-import { useRef, useState } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import paginationArrow from '../assets/pagination-arrow.svg'
-// import { GlobalStates } from '../context/GlobalStates'
+import { GlobalStates } from '../context/GlobalStates'
+import { DataContext } from '../context/DataContext'
 
 export default function Pagination() {
-    // const { Styles } = useContext(GlobalStates)
-    const btnStyles = 'px-[13px] py-[9px] mx-[6px] rounded-full bg-gray-200 text-gray-100 hover:text-cyan'
+    const { setPageNumberToDisplay } = useContext(DataContext)
+    const { Styles } = useContext(GlobalStates)
+    
     const [currentPage, setCurrentPage] = useState(1)
+    const [showLeftDots, setShowLeftDots] = useState(false)
+    const [showRightDots, setShowRightDots] = useState(true)
+    const [isBtnActive, setIsBtnActive] = useState(true)
     
-    const refs = useRef({})
-    
-    const TotalPages = 250;
+    const TotalPages = 10;
 
-    const next = ()=> {
-        if(currentPage === TotalPages) {
-            setCurrentPage(TotalPages)
-            return
-        }else if(currentPage < TotalPages) {
-            setCurrentPage(currentPage + 1)
+    const toggleDotsVisibility = () => {
+        if (currentPage + 2 >= TotalPages) {
+            setShowRightDots(false)
+            setShowLeftDots(true)
+        } else {
+            setShowRightDots(true)
+            setShowLeftDots(false)
         }
     }
     
-    const previous = ()=> {
-
-        currentPage > 1 ? setCurrentPage(currentPage - 1) : setCurrentPage(1);
-    }
-    
-    const multiStepNext = ()=> {
-        if(currentPage + 2 > TotalPages) {
+    const next = () => {
+        if (currentPage === TotalPages) return
+        if(currentPage + 1 < TotalPages ) {
             setCurrentPage(currentPage + 1)
         } else {
-            setCurrentPage(currentPage + 2)
+            setIsBtnActive(currentPage + 1 === TotalPages ?  false : true)
+            setCurrentPage(TotalPages)
         }
-    } 
-    const multiStepPrev = ()=> {
-        if(currentPage - 2 < 1) {
+    }
+    const prev = () => {
+        if (currentPage === 1) return
+        setIsBtnActive(true)
+        if(currentPage - 1 > 0) {
             setCurrentPage(currentPage - 1)
         } else {
-            setCurrentPage(currentPage - 2)
+            setCurrentPage(1)
         }
-
-        
-    } 
-    
-    const totalPagesBtn = ()=> {
+    }
+    const totalBtn = (e) =>{
         setCurrentPage(TotalPages)
-        
-        Object.keys(refs.current).forEach(el => el?.classList?.remove('btn-active'))
-        refs.current.next.classList.add('btn-active');
+        setIsBtnActive(false)
+        e.target.style = 'display: none;'
+    }
 
-        refs.current.leftDots.style ='display: block;'
-        refs.current.rightDots.style ='display: none;'
-        refs.current.totalPagesBtn.style ='display: none;'
+    console.log(currentPage)
+    useEffect(()=> {
+        toggleDotsVisibility()
+    }, [currentPage])
 
-        refs.current.next.innerText = TotalPages - 1;
-        refs.current.current.innerText = TotalPages;
-    } 
-
-    const BtnsDisplay = [
-        { 
-            name: 'leftArrow',
-            onClickFunc: previous, 
-            styles: `rotate-180 hover:-translate-x-0.5 transition-all duration-200 [&>*]:w-full`, 
-            content: (<img src={paginationArrow} alt='previous' />) 
-        },
-        { 
-            name: 'leftDots',
-            onClickFunc: multiStepPrev, 
-            styles: `${btnStyles} hidden`, 
-            content: '..', 
-        },
-        { 
-            name: 'current',
-            onClickFunc: multiStepPrev, 
-            styles: `${btnStyles}`, 
-            content: currentPage, 
-        },
-        { 
-            name: 'next',
-            onClickFunc: next, 
-            styles: `${btnStyles}`, 
-            content: currentPage + 1, 
-        },
-        { 
-            name: 'rightDots',
-            onClickFunc: multiStepNext, 
-            styles: btnStyles, 
-            content: '..', 
-        },
-        { 
-            name: 'totalPagesBtn',
-            onClickFunc: totalPagesBtn, 
-            styles: btnStyles, 
-            content: TotalPages, 
-        },
-        { 
-            name: 'rightArrow',
-            onClickFunc: next, 
-            styles: `hover:translate-x-0.5 transition-all duration-200 [&>*]:w-full`, 
-            content: (<img src={paginationArrow} alt='next' />) 
-        },
-    ]
+    const btnStyles = 'px-[13px] py-[9px] mx-[6px] rounded-full bg-gray-200 text-gray-100 hover:text-cyan'
+    
     return(
-        <div className="flex items-center justify-between">
-            {/* <form>
-                <label>per page: </label>
-                <input className={`${Styles.inputStyle} w-16 py-0.5 !appearance-none`} type='number' placeholder='10' />
-            </form> */}
+        <div className="col-span-2 flex flex-col gap-4 my-8 sm:my-0 sm:flex-row items-center justify-between">
+            <label className='text-nowrap'>per page: 
+                <select onClick={(e)=> setPageNumberToDisplay(e.target.value)} className={`${Styles.inputStyle}`}>
+                    {['5', '10', '15', '20'].map((num, ind)=> <option vlaue={num} key={ind}>{num}</option>)}
+                </select>
+            </label>
+
             <div className='flex items-center justify-end text-sm font-semibold'>
-                {BtnsDisplay.map(btnObj => {
-                    return(
-                        <button 
-                            key={btnObj.name}
-                            ref={(el)=> refs.current[btnObj.name] = el}
-                            className={btnObj.styles}
-                            onClick={btnObj.onClickFunc}
-                        >
-                            {btnObj.content}
-                        </button>
-                    )
-                })}
+                <button onClick={prev} className={`rotate-180 hover:-translate-x-0.5 transition-all duration-200 [&>*]:w-full`}> 
+                    <img src={paginationArrow} alt='previous' />
+                </button>
+                {showLeftDots && <button className={btnStyles} onClick={()=> setCurrentPage(Math.max(currentPage - 2, 1))}>..</button>}
+                <button className={`${btnStyles} ${isBtnActive ? 'btn-active' : ''}`}>{currentPage === TotalPages ? currentPage - 1 : currentPage}</button>
+                <button className={`${btnStyles} ${!isBtnActive ? 'btn-active' : ''}`}>{currentPage === TotalPages ? currentPage : currentPage + 1}</button>
+                {showRightDots && <button className={btnStyles} onClick={()=> setCurrentPage(Math.min(currentPage + 2, TotalPages))}>..</button>}
+                {TotalPages > currentPage + 1 && <button className={btnStyles} onClick={(e) => totalBtn(e)}>{TotalPages}</button>}
+                <button onClick={next} className={`hover:translate-x-0.5 transition-all duration-200 [&>*]:w-full`}> 
+                    <img src={paginationArrow} alt='next' />
+                </button>
             </div>
         </div>
     )
