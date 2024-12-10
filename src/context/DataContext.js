@@ -14,7 +14,7 @@ export default function DataProvider (props){
     
     const getCryptoData = async ()=> {
         try {
-            const coinsListResponse = await fetch(`/api/v3/coins/list`)
+            const coinsListResponse = await fetch(`https://api.coingecko.com/api/v3/coins/list`)
             if(!coinsListResponse.ok) throw new Error('Failed to fetch coins list')
             const coinsListData = await coinsListResponse.json()
             
@@ -22,7 +22,7 @@ export default function DataProvider (props){
             console.log(coinsListData.length)
         
 
-            const url = `/api/v3/coins/markets?vs_currency=${currency || 'usd'}&ids=${coinSearch}&order=${sortBy}&per_page=${pageNumberToDisplay}&page=${page}&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
+            const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency || 'usd'}&ids=${coinSearch}&order=${sortBy}&per_page=${pageNumberToDisplay}&page=${page}&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
             const marketResponse = await fetch(url)
             if(!marketResponse.ok) throw new Error('Failed to fetch market data')
             const marketData = await marketResponse.json()
@@ -35,7 +35,7 @@ export default function DataProvider (props){
     const getSearchResult = async(query)=> {
         if(!query) return
         try {
-            const url= `/api/v3/search?query=${query}`
+            const url= `https://api.coingecko.com/api/v3/search?query=${query}`
             const data = await fetch(url)
                         .then(res=> res.json())
                         .then(json => json)
