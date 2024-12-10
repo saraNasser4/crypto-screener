@@ -82,7 +82,7 @@ export default function TableComp (){
                                                                     </defs>
                                                                     </svg>
                                                                 </button>
-                                                                <img className='w-6 h-6 mx-1.5' src={data.image} alt='currency logo'/>
+                                                                <img className='w-6 h-6 mx-1.5' src={data?.image} alt='currency logo'/>
                                                                 <span>{value}</span>
                                                             </div>
                                                         ) : value

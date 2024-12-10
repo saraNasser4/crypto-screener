@@ -22,7 +22,7 @@ export default function DataProvider (props){
             console.log(coinsListData.length)
         
 
-            const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency || 'usd'}&ids=${coinSearch}&order=${sortBy}&per_page=${pageNumberToDisplay}&page=${page}&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
+            const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency || 'usd'}&ids=${coinSearch}&order=${sortBy}&per_page=${pageNumberToDisplay.toString()}&page=${page.toString()}&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
             const marketResponse = await fetch(url)
             if(!marketResponse.ok) throw new Error('Failed to fetch market data')
             const marketData = await marketResponse.json()
@@ -52,9 +52,8 @@ export default function DataProvider (props){
 
 
     useEffect(()=> {
-        const settime = setTimeout(()=> getCryptoData(), 300)
-        return () => clearTimeout(settime)
-    }, [coinSearch, currency, sortBy, page, pageNumberToDisplay])
+        getCryptoData()
+    }, [coinSearch, currency, sortBy, page, totalPages, pageNumberToDisplay])
     return(
         <DataContext.Provider 
             value={{
