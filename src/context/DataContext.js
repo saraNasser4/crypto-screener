@@ -1,11 +1,10 @@
 import { createContext, useEffect, useState } from "react"
-import debounce from "lodash.debounce";
 
 export const DataContext = createContext({})
 
 export default function DataProvider (props){
-    const [cryptoData, setCryptoData] = useState();
-    const [searchData, setSearchData] = useState();
+    const [cryptoData, setCryptoData] = useState([]);
+    const [searchData, setSearchData] = useState([]);
     const [coinSearch, setCoinSearch] = useState('');
     const [currency, setCurrency] = useState('usd');
     const [sortBy, setSortBy] = useState('market_cap_desc');
@@ -41,7 +40,6 @@ export default function DataProvider (props){
                         .then(res=> res.json())
                         .then(json => json)
             setSearchData(data)
-            console.log(data)
         } catch(err) {
             console.log(err, 'Search Error')
         }
@@ -52,11 +50,10 @@ export default function DataProvider (props){
         setCoinSearch('')
     }
 
-    const debouncedCryptoData = debounce(getCryptoData, 500);
 
     useEffect(()=> {
-        debouncedCryptoData()
-        return ()=> debouncedCryptoData.cancel()
+        const settime = setTimeout(()=> getCryptoData(), 300)
+        return () => clearTimeout(settime)
     }, [coinSearch, currency, sortBy, page, pageNumberToDisplay])
     return(
         <DataContext.Provider 
