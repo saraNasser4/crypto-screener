@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react"
+import debounce from "lodash.debounce";
 
 export const DataContext = createContext({})
 
@@ -51,8 +52,11 @@ export default function DataProvider (props){
         setCoinSearch('')
     }
 
+    const debouncedCryptoData = debounce(getCryptoData, 500);
+
     useEffect(()=> {
-        getCryptoData()
+        debouncedCryptoData()
+        return ()=> debouncedCryptoData.cancel()
     }, [coinSearch, currency, sortBy, page, pageNumberToDisplay])
     return(
         <DataContext.Provider 
