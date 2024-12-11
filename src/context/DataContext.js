@@ -10,7 +10,7 @@ export default function DataProvider (props){
     const [sortBy, setSortBy] = useState('market_cap_desc');
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(100);
-    const [pageNumberToDisplay, setPageNumberToDisplay] = useState(5);
+    const [perPage, setPerPage] = useState(5);
     
     const getCryptoData = async ()=> {
         try {
@@ -18,11 +18,9 @@ export default function DataProvider (props){
             if(!coinsListResponse.ok) throw new Error('Failed to fetch coins list')
             const coinsListData = await coinsListResponse.json()
             
-            setTotalPages(Math.ceil(coinsListData.length / pageNumberToDisplay))
-            console.log(coinsListData.length)
-        
+            setTotalPages(Math.ceil(coinsListData.length / perPage))     
 
-            const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency || 'usd'}&ids=${coinSearch}&order=${sortBy}&per_page=${pageNumberToDisplay.toString()}&page=${page.toString()}&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
+            const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency || 'usd'}&ids=${coinSearch}&order=${sortBy}&per_page=${perPage}&page=${page}&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
             const marketResponse = await fetch(url)
             if(!marketResponse.ok) throw new Error('Failed to fetch market data')
             const marketData = await marketResponse.json()
@@ -53,7 +51,7 @@ export default function DataProvider (props){
 
     useEffect(()=> {
         getCryptoData()
-    }, [coinSearch, currency, sortBy, page, totalPages, pageNumberToDisplay])
+    }, [coinSearch, currency, sortBy, page, totalPages, perPage])
     return(
         <DataContext.Provider 
             value={{
@@ -64,7 +62,7 @@ export default function DataProvider (props){
                 currency, setCurrency, 
                 sortBy, setSortBy, 
                 page, setPage, 
-                setPageNumberToDisplay,
+                setPerPage,
                 totalPages,
                 restFunc
             }}

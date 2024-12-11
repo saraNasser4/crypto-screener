@@ -54,6 +54,6 @@ It was really a daunting task I'd been tryna solve it for 3 days almost. however
 I removed the useRef to handling the DOM manipulate and instead I used useState why? using useRef is daunting to debug compared to useState hook.
 
 
-### `npm run build` fails to minify
+## Finish with the Trending Page
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+I added new context here to fetch the trending data and I styled them with the grid and everythings work fine.

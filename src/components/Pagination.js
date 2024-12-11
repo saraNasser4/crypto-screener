@@ -4,14 +4,13 @@ import { GlobalStates } from '../context/GlobalStates'
 import { DataContext } from '../context/DataContext'
 
 export default function Pagination() {
-    const { page, setPage, totalPages, pageNumberToDisplay ,setPageNumberToDisplay } = useContext(DataContext)
+    const { page, setPage, totalPages ,setPerPage } = useContext(DataContext)
     const { Styles } = useContext(GlobalStates)
     
     const [showLeftDots, setShowLeftDots] = useState(false)
     const [showRightDots, setShowRightDots] = useState(true)
     const [isBtnActive, setIsBtnActive] = useState(true)
     
-    console.log(totalPages)
     const toggleDotsVisibility = () => {
         if (page + 2 >= totalPages) {
             setShowRightDots(false)
@@ -55,7 +54,7 @@ export default function Pagination() {
     return(
         <div className="col-span-2 flex flex-col gap-4 my-8 sm:my-0 sm:flex-row items-center justify-between">
             <label className='text-nowrap'>per page: 
-                <select onClick={(e)=> setPageNumberToDisplay(e.target.value)} className={`${Styles.inputStyle}`}>
+                <select onClick={(e)=> setPerPage(e.target.value)} className={`${Styles.inputStyle}`}>
                     {[5, 10, 15, 20].map((num, ind)=> <option vlaue={num} key={ind}>{num}</option>)}
                 </select>
             </label>
