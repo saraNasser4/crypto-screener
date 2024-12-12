@@ -53,7 +53,10 @@ I realized that the Home component was not useful to me and also it'd made diffc
 It was really a daunting task I'd been tryna solve it for 3 days almost. however, I figured out the simplicity is the key instead of writing down 7 func and object contains all of the data I'd write only 3 (next, prev, total btn) and it works fine.
 I removed the useRef to handling the DOM manipulate and instead I used useState why? using useRef is daunting to debug compared to useState hook.
 
-
 ## Finish with the Trending Page
 
 I added new context here to fetch the trending data and I styled them with the grid and everythings work fine.
+
+## Finish with the Saved Page
+
+I added new context here to check if the coin exist in your localStorage or not and put it if not.

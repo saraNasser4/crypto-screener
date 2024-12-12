@@ -3,12 +3,12 @@ import { TrendingContext } from "../context/TrendingContext"
 
 export default function Crypto () {
     const { trendData } = useContext(TrendingContext)
-    // console.log(trendData.coins[0]?.item?.name)
+    console.log(trendData)
 
     return(
         <section className="w-[90%] md:w-[80%] md:max-w-[1650px] my-10 lg:my-16">
             {trendData && <div className="w-full min-h-[60vh] grid grid-cols-1 lg:grid-cols-2 gap-4 mt-8 py-8 sm:pl-3 border border-gray-100 rounded">
-                {trendData?.coins.map((coinObj)=> {
+                {trendData.map((coinObj)=> {
                 
                     return(
                         <div key={coinObj?.item?.id} className="relative w-full max-w-[450px] min-h-[150px] mx-auto p-4 flex items-center justify-between bg-gray-200 hover:bg-gray-100/30 rounded sm:mt-10">

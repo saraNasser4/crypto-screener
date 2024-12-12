@@ -10,8 +10,7 @@ export default function TrendingProvider (props){
             const trendingResponse = await fetch(`https://api.coingecko.com/api/v3/search/trending`) 
             if(!trendingResponse.ok) throw new Error('Failed to fetch Trending data')
             const trendingData = await trendingResponse.json()
-            console.log(trendingData?.coins[0].item)
-            setTrendData(trendingData)
+            setTrendData(trendingData?.coins)
         } catch(err) {
             console.error(err, 'Trend Data Fetch Error')
         }
