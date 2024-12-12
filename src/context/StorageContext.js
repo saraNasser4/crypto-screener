@@ -29,7 +29,6 @@ export default function StroageProvider (props){
             if(!savedResponse.ok) throw new Error('Failed to fetch Saved data')
             const savedFetching = await savedResponse.json()
             setSavedData(savedFetching)
-            console.log(storageData)
         } catch(err) {
             console.error(err, 'Crypto Data Fetch Saved Data Error')
         }
