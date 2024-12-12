@@ -1,36 +1,45 @@
-import { createContext, useEffect, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
+import { DataContext } from "./DataContext";
 
 export const StorageContext = createContext({})
 
 export default function StroageProvider (props){
-    const [storageData, setStorageData] = useState([]);
+    const [storageData, setStorageData] = useState(JSON.parse(localStorage.getItem('coins')) || []);
+    const [savedData, setSavedData] = useState([]);
+
+    const { currency, sortBy } = useContext(DataContext)
     
     const changeSaved = (coinId)=> {
-        let oldCoins = JSON.parse(localStorage.getItem('coins'))
-
-        if(oldCoins.includes(coinId)) {
-            setStorageData(oldCoins.filter(el => el !== coinId))
-            localStorage.removeItem('coins', JSON.stringify(coinId))
+        if(storageData.includes(coinId)) {
+            const newCoins = storageData.filter(el => el !== coinId)
+            setStorageData(newCoins)
+            localStorage.setItem('coins', JSON.stringify(newCoins))
         } else {
-            setStorageData((prev)=> [...prev, coinId])
-            localStorage.setItem('coins', JSON.stringify(storageData))//
+            const newCoins = [...storageData, coinId]
+            setStorageData(newCoins)
+            localStorage.setItem('coins', JSON.stringify(newCoins))//
         }
 
     }
 
-    // const removeCoin = (coinId)=> {
-    //     let oldCoins = JSON.parse(localStorage.getItem)
-    // }
+    const getSavedData = async ()=> {
+        try {
+            const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&ids=${storageData.join(',')}&order=${sortBy}&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
+            const savedResponse = await fetch(url)
+            if(!savedResponse.ok) throw new Error('Failed to fetch Saved data')
+            const savedFetching = await savedResponse.json()
+            setSavedData(savedFetching)
+            console.log(storageData)
+        } catch(err) {
+            console.error(err, 'Crypto Data Fetch Saved Data Error')
+        }
+    }
 
 
     useEffect(()=> {
-        let isCoins = JSON.parse(localStorage.getItem('coins')) || false;
-        if(isCoins) {
-            let totalCoins = JSON.parse(localStorage.getItem('coins'))
-            setStorageData(totalCoins)
-         }else {
-            localStorage.setItem('coins', JSON.stringify([]))
-         }
+        let initialCoins = JSON.parse(localStorage.getItem('coins')) || [];
+        setStorageData(initialCoins)
+        getSavedData()
     }, [])
 
     return(
@@ -38,7 +47,7 @@ export default function StroageProvider (props){
             value={{
                 storageData,
                 changeSaved,
-                // removeCoin
+                savedData
             }}
         >
             {props.children}

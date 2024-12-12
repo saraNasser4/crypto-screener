@@ -1,9 +1,8 @@
 import { useContext } from "react"
 import { TrendingContext } from "../context/TrendingContext"
 
-export default function Crypto () {
+export default function Trending () {
     const { trendData } = useContext(TrendingContext)
-    console.log(trendData)
 
     return(
         <section className="w-[90%] md:w-[80%] md:max-w-[1650px] my-10 lg:my-16">

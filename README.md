@@ -60,3 +60,12 @@ I added new context here to fetch the trending data and I styled them with the g
 ## Finish with the Saved Page
 
 I added new context here to check if the coin exist in your localStorage or not and put it if not.
+
+## Removed all of thead and tbody to its component
+
+the reason of it cuz i needed the same code in the Saved page so instead of copy the same code I'd made an individual component to each one.
+
+### Conclusion
+
+in this app I've tried a lot of new things like React Router, lazy load, display data in more profession way and more.
+the api that I've used wasn't that great for me actually because of the limt of the requests which is not suitable for the kind of data the it provides but overall it was a great project with a lot of bugs.
